@@ -50,13 +50,12 @@ class VentanaInicioSesion(QMainWindow):
     def iniciar_sesion(self):
         cod_empleado = self.input_empleado.text()
         contrasena = self.input_contrasena.text()
-        
 
-        if cod_empleado in self.balneario.dicusuarios and self.balneario.dicusuarios[cod_empleado] == contrasena:
+        if cod_empleado in self.balneario.dicusuarios.keys() and self.balneario.dicusuarios[cod_empleado] == contrasena:
             print("Inicio de sesión exitoso")
         else:
             print(self.balneario)
-            print("Empleado o contraseña incorrectos",cod_empleado,cod_empleado in self.balneario.dicusuarios, self.balneario.dicusuarios.get(cod_empleado).contra, self.balneario.dicemp[cod_empleado] == contrasena)
+            print("Empleado o contraseña incorrectos",cod_empleado,cod_empleado in self.balneario.dicusuarios, self.balneario.dicusuarios[int(cod_empleado)], self.balneario.dicemp[cod_empleado] == contrasena)
 
 
 if __name__ == "__main__":
