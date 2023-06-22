@@ -70,30 +70,16 @@ class Balneario():
             print("Error !", e, "El cliente no fue registrado.")
             return False
 
-#busca el dni del cliente    
+#busca el dni del cliente
     def validar_cliente(self, dni_cliente):
         buscar_dni=lambda dni:True if dni in self.dicclientes.keys() else False
         return buscar_dni(int(dni_cliente))
 
-#validar de nuevo  la contraseña
-    def validar_contraseña2(self,usuario,contraseña):
+#validar  la contraseña y el codigo de empleado ingresados
+    def validar_contraseña(self,usuario,contraseña):
         if usuario in self.dicusuarios.keys() and self.dicusuarios[usuario]==contraseña:
             return True
         else:
-            return False
-
-#pidey verifica la contraseña del emp
-    def validar_contraseña(self, codemp_ingresado):
-        if codemp_ingresado in self.dicusuarios.keys():
-            contra=input("Ingrese su contraseña: ")
-            while self.dicusuarios[codemp_ingresado]!=contra and contra!="0":
-                contra=input("Contraseña incorrecta.Vuelva a intentar (o presione 0 para salir): ")
-            if contra=="0":
-                return False
-            else:
-                return True
-        else:
-            print("Ese empleado no está registrado en el sistema.")
             return False
 
 #carga un archivo csv de contraseñas para poder leerlo nosotros y tenerlo de backup

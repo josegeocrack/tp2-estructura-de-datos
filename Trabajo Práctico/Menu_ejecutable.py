@@ -12,7 +12,7 @@ except FileNotFoundError:
         balneario=Balneario("Carpas y sombrillas")
         balneario.cargar_empleado("Leandro Díaz", "21333333", "M")
 
-
+#Definimos la clase LoginWidget que hereda de QWidget y representa la interfaz de inicio de sesión:
 class LoginWidget(QWidget):
     def __init__(self):
         super().__init__()
@@ -39,11 +39,14 @@ class LoginWidget(QWidget):
         self.submit_button.move(100, 100)
         self.submit_button.clicked.connect(self.verify_credentials)
 
+#Definimos el método verify_credentials que se ejecuta cuando se hace clic en el botón de inicio de sesión. 
+#Este método verifica las credenciales ingresadas por el usuario:
     def verify_credentials(self):
         codemp = self.user_input.text()
         contraseña = self.password_input.text()
 
-        if balneario.validar_contraseña2(codemp, contraseña):
+#validar contraseña la traemos desde balneario para poder ver que el empleado se encuentre registrado en el sistema
+        if balneario.validar_contraseña(codemp, contraseña):
             self.close()
             self.usuario = codemp
             self.contraseña = contraseña
@@ -52,9 +55,12 @@ class LoginWidget(QWidget):
             self.password_input.setText('')
             QMessageBox.warning(self, 'Credenciales inválidas', 'Credenciales inválidas. Vuelve a intentarlo.')
 
+#En la parte principal del programa, creamos una instancia de QApplication:
 if __name__ == '__main__':
     app = QApplication(sys.argv)
 
+#Dentro de un bucle while True, creamos una instancia de LoginWidget, 
+#mostramos la interfaz de inicio de sesión y ejecutamos la aplicación:
     while True:
         login_widget = LoginWidget()
         login_widget.show()
@@ -68,10 +74,13 @@ if __name__ == '__main__':
             if respuesta == QMessageBox.Yes:
                 sys.exit()
 
+    #Si quisiésemos usarlas, las variables del usuario y la contraseña ingresados se buscan de esa forma
     # print("Usuario:", login_widget.usuario)
     # print("Contraseña:", login_widget.contraseña)
 
-    #Una vez que se valida la contraseña, se ingresa al Sistema de Balneario y se pide la cotización de los productos para el día
+#UNA VEZ QUE SE CIERRA LA INTERFAZ, COMIENZA A FUNCIONAR EL SISTEMA EN LA TERMINAL
+
+#Una vez que se valida la contraseña, se ingresa al Sistema de Balneario y se pide la cotización de los productos para el día
     print("Bienvenido al sistema de reservas del Balneario")
     cotizacioncarpa=input("Antes de comenzar, ingrese la cotización de hoy para el precio por día de las carpas: ")
     while not(chequear_flotante(cotizacioncarpa)):
